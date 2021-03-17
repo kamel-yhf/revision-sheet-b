@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { SheetsService } from './sheets.service';
 
 @Controller('sheets')
@@ -29,9 +37,19 @@ export class SheetsController {
     return oneSheet;
   }
 
+  @Patch(':id')
+  async updateSheet(
+    @Param('id') sheetId: string,
+    @Body('question') sheetQuestion: string,
+    @Body('response') sheetResponse: string,
+  ) {
+    await this.sheetsService.updateSheet(sheetId, sheetQuestion, sheetResponse);
+    return 'sheet updated !';
+  }
+
   @Delete(':id')
   async removeSheet(@Param('id') sheetId: string) {
     await this.sheetsService.deleteSheet(sheetId);
-    return "sheet delete !";
+    return 'sheet delete !';
   }
 }

@@ -40,7 +40,34 @@ export class SheetsService {
     };
   }
 
+  //update sheet
+  async updateSheet(sheetId: string, question: string, response: string) {
+    const updateSheet = await this.findSheet(sheetId);
+    if (question) {
+      updateSheet.question = question;
+    }
+    if (response) {
+      updateSheet.response = response;
+    }
+    updateSheet.save();
+  }
+
+  //delete sheet
   async deleteSheet(sheetId: string) {
     await this.sheetModel.findByIdAndDelete({ _id: sheetId }).exec();
+  }
+
+  //find sheet
+  private async findSheet(id: string): Promise<Sheet> {
+    let sheet;
+    try {
+      sheet = await this.sheetModel.findById(id).exec();
+    } catch (error) {
+      throw new NotFoundException('Could not find sheet.');
+    }
+    if (!sheet) {
+      throw new NotFoundException('Could not find sheet.');
+    }
+    return sheet;
   }
 }
