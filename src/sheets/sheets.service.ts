@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -38,5 +38,9 @@ export class SheetsService {
       question: sheet.question,
       response: sheet.response,
     };
+  }
+
+  async deleteSheet(sheetId: string) {
+    await this.sheetModel.findByIdAndDelete({ _id: sheetId }).exec();
   }
 }

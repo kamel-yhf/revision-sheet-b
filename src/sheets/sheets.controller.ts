@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { SheetsService } from './sheets.service';
 
 @Controller('sheets')
@@ -29,4 +29,9 @@ export class SheetsController {
     return oneSheet;
   }
 
+  @Delete(':id')
+  async removeSheet(@Param('id') sheetId: string) {
+    await this.sheetsService.deleteSheet(sheetId);
+    return "sheet delete !";
+  }
 }
