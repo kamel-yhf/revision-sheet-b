@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SheetsService } from './sheets.service';
 
 @Controller('sheets')
@@ -15,5 +15,11 @@ export class SheetsController {
       sheetResponse,
     );
     return { id: generatedId };
+  }
+
+  @Get()
+  async getAllsheets() {
+    const sheets = await this.sheetsService.getSheets();
+    return sheets;
   }
 }

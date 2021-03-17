@@ -20,4 +20,13 @@ export class SheetsService {
     return result.id as string;
   }
 
+  //get sheets
+  async getSheets() {
+    const sheet = await this.sheetModel.find().exec();
+    return sheet.map((sh) => ({
+      id: sh.id,
+      question: sh.question,
+      response: sh.response,
+    }));
+  }
 }
