@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { SheetsService } from './sheets.service';
 
 @Controller('sheets')
@@ -22,4 +22,11 @@ export class SheetsController {
     const sheets = await this.sheetsService.getSheets();
     return sheets;
   }
+
+  @Get(':id')
+  getOnesheet(@Param('id') sheetId: string) {
+    const oneSheet = this.sheetsService.getOneSheet(sheetId);
+    return oneSheet;
+  }
+
 }

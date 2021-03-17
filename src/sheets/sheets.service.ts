@@ -22,11 +22,21 @@ export class SheetsService {
 
   //get sheets
   async getSheets() {
-    const sheet = await this.sheetModel.find().exec();
-    return sheet.map((sh) => ({
+    const sheets = await this.sheetModel.find().exec();
+    return sheets.map((sh) => ({
       id: sh.id,
       question: sh.question,
       response: sh.response,
     }));
+  }
+
+  //get one sheet
+  async getOneSheet(sheetId: string) {
+    const sheet = await this.sheetModel.findById(sheetId);
+    return {
+      id: sheet.id,
+      question: sheet.question,
+      response: sheet.response,
+    };
   }
 }
