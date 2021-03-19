@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Sheet } from 'src/sheets/sheet.model';
 import { DecksService } from './decks.service';
 
@@ -11,10 +11,7 @@ export class DecksController {
     @Body('name') deckName: string,
     @Body('sheet') deckSheet: Sheet,
   ) {
-    const generatedId = await this.decksService.insertDeck(
-        deckName,
-        deckSheet,
-    );
+    const generatedId = await this.decksService.insertDeck(deckName, deckSheet);
     return { id: generatedId };
   }
 
@@ -22,5 +19,11 @@ export class DecksController {
   async getAlldecks() {
     const decks = await this.decksService.getDecks();
     return decks;
+  }
+
+  @Get(':id')
+  async getOneDeck(@Param('id') deckId: string) {
+    const oneDeck = this.decksService.getOneDeck(deckId);
+    return oneDeck;
   }
 }
