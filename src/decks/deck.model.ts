@@ -1,16 +1,14 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
-import { Sheet } from 'src/sheets/sheet.model';
-
-export type DeckDocument = Deck & Document;
+import { Sheet, sheetSchema } from 'src/sheets/sheet.model';
 
 @Schema()
-export class Deck {
-  @Prop()
+export class Deck extends mongoose.Document {
+  @Prop({ required: true })
   name: string;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Sheet' }] })
+  @Prop({ type: [sheetSchema] })
   sheet: Sheet[];
 }
 
-export const DeckSchema = SchemaFactory.createForClass(Deck);
+export const deckSchema = SchemaFactory.createForClass(Deck);
