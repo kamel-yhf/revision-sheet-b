@@ -46,6 +46,11 @@ export class DecksService {
     updateDeck.save();
   }
 
+  //delete deck
+  async deleteDeck(deckId: string) {
+    await this.deckModel.findByIdAndDelete({ _id: deckId }).exec();
+  }
+
   //find deck
   private async findDeck(id: string): Promise<Deck> {
     let deck;
