@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { Sheet } from 'src/sheets/sheet.model';
 import { DecksService } from './decks.service';
 
@@ -25,5 +25,15 @@ export class DecksController {
   async getOneDeck(@Param('id') deckId: string) {
     const oneDeck = this.decksService.getOneDeck(deckId);
     return oneDeck;
+  }
+
+  @Patch(':id')
+  async updateDeck(
+    @Param('id') deckId: string,
+    @Body('name') deckName: string,
+    @Body('sheet') deckSheet: Sheet,
+  ) {
+    await this.decksService.updateDeck(deckId, deckName, deckSheet);
+    return 'update deck ok';
   }
 }

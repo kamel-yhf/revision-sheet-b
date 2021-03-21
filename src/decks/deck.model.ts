@@ -8,7 +8,7 @@ export class Deck extends mongoose.Document {
   name: string;
 
   @Prop({ type: [sheetSchema] })
-  sheet: Sheet[];
+  sheet: Sheet;
 }
 
 export const deckSchema = SchemaFactory.createForClass(Deck);
