@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { SheetsModule } from './sheets/sheets.module';
 import { DecksModule } from './decks/decks.module';
 import { CategorysModule } from './categorys/categorys.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CategorysModule } from './categorys/categorys.module';
     MongooseModule.forRoot('mongodb://localhost:27017/revision'),
     DecksModule,
     CategorysModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
