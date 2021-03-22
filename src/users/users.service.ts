@@ -33,6 +33,19 @@ export class UsersService {
     return users;
   }
 
+  //get one user
+  async getOneUser(userId: string) {
+    const user = await this.userModel.findById(userId);
+    return {
+      id: user.id,
+      name: user.username,
+      email: user.email,
+      password: user.password,
+      deck: user.deck,
+    };
+  }
+
+  // hash password whith bcrypt
   hashPassword(password) {
     const salt = 10;
     const hash = bcrypt.hashSync(password, salt);

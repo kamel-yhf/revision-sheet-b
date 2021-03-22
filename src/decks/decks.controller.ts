@@ -31,7 +31,7 @@ export class DecksController {
 
   @Get(':id')
   async getOneDeck(@Param('id') deckId: string) {
-    const oneDeck = this.decksService.getOneDeck(deckId);
+    const oneDeck = await this.decksService.getOneDeck(deckId);
     return oneDeck;
   }
 

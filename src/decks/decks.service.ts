@@ -24,7 +24,7 @@ export class DecksService {
     return decks;
   }
 
-  //get on deck
+  //get one deck
   async getOneDeck(deckId: string) {
     const deck = await this.deckModel.findById(deckId);
     return {
