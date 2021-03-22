@@ -45,6 +45,24 @@ export class UsersService {
     };
   }
 
+  //update user
+  async updateDeck(userId: string, username: string, email: string, password: string, deck: Deck) {
+    const updateUser = await this.userModel.findByIdAndUpdate(userId);
+    if (username) {
+      updateUser.username = username;
+    }
+    if (email) {
+      updateUser.email = email;
+    }
+    if (password) {
+      updateUser.password = password;
+    }
+    if (deck) {
+      updateUser.deck = deck;
+    }
+    updateUser.save();
+  }
+
   // hash password whith bcrypt
   hashPassword(password) {
     const salt = 10;

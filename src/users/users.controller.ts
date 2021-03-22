@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { Deck } from 'src/decks/deck.model';
 import { UsersService } from './users.service';
 
@@ -32,5 +32,23 @@ export class UsersController {
   async getOneUser(@Param('id') userId: string) {
     const oneUser = await this.usersService.getOneUser(userId);
     return oneUser;
+  }
+
+  @Patch(':id')
+  async updateUser(
+    @Param('id') userId: string,
+    @Body('username') userName: string,
+    @Body('email') userEmail: string,
+    @Body('pasword') userPassword: string,
+    @Body('deck') userDeck: Deck,
+  ) {
+    await this.usersService.updateDeck(
+      userId,
+      userName,
+      userEmail,
+      userPassword,
+      userDeck,
+    );
+    return 'update user ok';
   }
 }
