@@ -42,7 +42,7 @@ export class SheetsService {
 
   //update sheet
   async updateSheet(sheetId: string, question: string, response: string) {
-    const updateSheet = await this.findSheet(sheetId);
+    const updateSheet = await this.sheetModel.findByIdAndUpdate(sheetId);
     if (question) {
       updateSheet.question = question;
     }
@@ -57,17 +57,17 @@ export class SheetsService {
     await this.sheetModel.findByIdAndDelete({ _id: sheetId }).exec();
   }
 
-  //find sheet
-  private async findSheet(id: string): Promise<Sheet> {
-    let sheet;
-    try {
-      sheet = await this.sheetModel.findById(id).exec();
-    } catch (error) {
-      throw new NotFoundException('Could not find sheet.');
-    }
-    if (!sheet) {
-      throw new NotFoundException('Could not find sheet.');
-    }
-    return sheet;
-  }
+  // //find sheet
+  // private async findSheet(id: string): Promise<Sheet> {
+  //   let sheet;
+  //   try {
+  //     sheet = await this.sheetModel.findById(id).exec();
+  //   } catch (error) {
+  //     throw new NotFoundException('Could not find sheet.');
+  //   }
+  //   if (!sheet) {
+  //     throw new NotFoundException('Could not find sheet.');
+  //   }
+  //   return sheet;
+  // }
 }

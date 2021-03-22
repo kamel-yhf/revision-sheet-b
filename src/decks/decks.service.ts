@@ -36,7 +36,7 @@ export class DecksService {
 
   //update deck
   async updateDeck(deckId: string, name: string, sheet: Sheet) {
-    const updateDeck = await this.findDeck(deckId);
+    const updateDeck = await this.deckModel.findByIdAndUpdate(deckId);
     if (name) {
       updateDeck.name = name;
     }
@@ -51,17 +51,17 @@ export class DecksService {
     await this.deckModel.findByIdAndDelete({ _id: deckId }).exec();
   }
 
-  //find deck
-  private async findDeck(id: string): Promise<Deck> {
-    let deck;
-    try {
-      deck = await this.deckModel.findById(id).exec();
-    } catch (error) {
-      throw new NotFoundException('Could not find deck.');
-    }
-    if (!deck) {
-      throw new NotFoundException('Could not find deck.');
-    }
-    return deck;
-  }
+  // //find deck
+  // private async findDeck(id: string): Promise<Deck> {
+  //   let deck;
+  //   try {
+  //     deck = await this.deckModel.findById(id).exec();
+  //   } catch (error) {
+  //     throw new NotFoundException('Could not find deck.');
+  //   }
+  //   if (!deck) {
+  //     throw new NotFoundException('Could not find deck.');
+  //   }
+  //   return deck;
+  // }
 }

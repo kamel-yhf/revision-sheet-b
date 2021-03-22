@@ -14,7 +14,7 @@ export class User extends mongoose.Document {
   password: string;
 
   @Prop({ type: [deckSchema] })
-  sheet: Deck;
+  deck: Deck;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);
