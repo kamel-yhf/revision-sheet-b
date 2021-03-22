@@ -46,7 +46,13 @@ export class UsersService {
   }
 
   //update user
-  async updateDeck(userId: string, username: string, email: string, password: string, deck: Deck) {
+  async updateDeck(
+    userId: string,
+    username: string,
+    email: string,
+    password: string,
+    deck: Deck,
+  ) {
     const updateUser = await this.userModel.findByIdAndUpdate(userId);
     if (username) {
       updateUser.username = username;
@@ -61,6 +67,11 @@ export class UsersService {
       updateUser.deck = deck;
     }
     updateUser.save();
+  }
+
+  //delete user
+  async deleteUser(userId: string) {
+    await this.userModel.findByIdAndDelete({ _id: userId }).exec();
   }
 
   // hash password whith bcrypt
