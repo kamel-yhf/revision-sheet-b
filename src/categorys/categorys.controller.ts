@@ -5,9 +5,16 @@ import { CategorysService } from './categorys.service';
 export class CategorysController {
   constructor(private readonly categorysService: CategorysService) {}
 
+  
+  @Get()
+  async getAllCategorys() {
+    const categorys = await this.categorysService.getAllCategorys();
+    return categorys;
+  }
+
   @Get(':id')
-  async getAllCategory(@Param('id') categoryId: string){
-    const category = await this.categorysService.getCategorys(categoryId);
+  async getCategory(@Param('id') categoryId: string){
+    const category = await this.categorysService.getCategory(categoryId);
     return category;
   }
 }

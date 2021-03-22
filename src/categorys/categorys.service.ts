@@ -9,8 +9,20 @@ export class CategorysService {
     @InjectModel('Category') private readonly categoryModel: Model<Category>,
   ) {}
 
+  // get all categorys
+  async getAllCategorys() {
+    const categorys = await this.categoryModel.find().exec();
+    return categorys.map((category) => ({
+      id: category.id,
+      easy: category.easy,
+      medium: category.medium,
+      hard: category.hard,
+    }));
+  }
+
+
   //get category
-  async getCategorys(categoryId: string) {
+  async getCategory(categoryId: string) {
     const category = await this.categoryModel.findById(categoryId);
     return {
       id: category.id,
