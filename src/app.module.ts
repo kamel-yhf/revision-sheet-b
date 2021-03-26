@@ -6,6 +6,7 @@ import { SheetsModule } from './sheets/sheets.module';
 import { DecksModule } from './decks/decks.module';
 import { CategorysModule } from './categorys/categorys.module';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from './users/users.module';
     DecksModule,
     CategorysModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
